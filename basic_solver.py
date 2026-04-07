@@ -8,18 +8,19 @@ def parse_scientific(prompt):
             print("  Invalid input. Use formats like: 1.5e3, -2.7E-4, 0.5, 3")
 
 def pick_operation():
-    ops = {"1": "add", "2": "subtract", "3": "multiply", "4": "divide", "5": "neg_log"}
+    ops = {"1": "add", "2": "subtract", "3": "multiply", "4": "divide", "5": "neg_log", "6": "pow10"}
     print("  Select operation:")
     print("    1. Add")
     print("    2. Subtract")
     print("    3. Multiply")
     print("    4. Divide")
     print("    5. -log(x)")
+    print("    6. 10^x")
     while True:
-        choice = input("  Enter 1-5: ").strip()
+        choice = input("  Enter 1-6: ").strip()
         if choice in ops:
             return ops[choice]
-        print("  Invalid choice. Enter 1, 2, 3, 4, or 5.")
+        print("  Invalid choice. Enter 1, 2, 3, 4, 5, or 6.")
 
 def solve():
     print("=== Basic Solver ===\n")
@@ -27,7 +28,10 @@ def solve():
     op = pick_operation()
     print()
 
-    if op == "neg_log":
+    if op == "pow10":
+        x = parse_scientific("  x = ")
+        print(f"\n  10^x = {10**x:.5e}")
+    elif op == "neg_log":
         x = parse_scientific("  x = ")
         if x <= 0:
             print("\n  -log(x) = undefined (x must be greater than 0)")
